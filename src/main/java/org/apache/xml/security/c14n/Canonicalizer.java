@@ -25,8 +25,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.xml.parsers.DocumentBuilder;
-
 import org.apache.xml.security.c14n.implementations.Canonicalizer11_OmitComments;
 import org.apache.xml.security.c14n.implementations.Canonicalizer11_WithComments;
 import org.apache.xml.security.c14n.implementations.Canonicalizer20010315ExclOmitComments;
@@ -252,20 +250,19 @@ public class Canonicalizer {
     public byte[] canonicalize(byte[] inputBytes)
         throws javax.xml.parsers.ParserConfigurationException,
         java.io.IOException, org.xml.sax.SAXException, CanonicalizationException {
+        Document document = null;
         InputStream bais = new ByteArrayInputStream(inputBytes);
         InputSource in = new InputSource(bais);
 
-        // needs to validate for ID attribute normalization
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(true, secureValidation);
-
+            // needs to validate for ID attribute normalization
         /*
-         * for some of the test vectors from the specification,
-         * there has to be a validating parser for ID attributes, default
-         * attribute values, NMTOKENS, etc.
-         * Unfortunately, the test vectors do use different DTDs or
-         * even no DTD. So Xerces 1.3.1 fires many warnings about using
-         * ErrorHandlers.
-         *
+             * for some of the test vectors from the specification,
+             * there has to be a validating parser for ID attributes, default
+             * attribute values, NMTOKENS, etc.
+             * Unfortunately, the test vectors do use different DTDs or
+             * even no DTD. So Xerces 1.3.1 fires many warnings about using
+             * ErrorHandlers.
+             *
          * Text from the spec:
          *
          * The input octet stream MUST contain a well-formed XML document,
@@ -279,14 +276,8 @@ public class Canonicalizer {
          * though the document type declaration is not retained in the
          * canonical form.
          */
-        db.setErrorHandler(new org.apache.xml.security.utils.IgnoreAllErrorHandler());
+         document = XMLUtils.read(in, secureValidation);
 
-        Document document;
-        try {
-            document = db.parse(in);
-        } finally {
-            XMLUtils.repoolDocumentBuilder(db);
-        }
         return this.canonicalizeSubtree(document);
     }
 

@@ -22,8 +22,7 @@ package org.apache.xml.security.test.dom;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-
-import javax.xml.parsers.DocumentBuilder;
+import java.io.InputStream;
 
 import org.apache.xml.security.signature.ObjectContainer;
 import org.apache.xml.security.signature.XMLSignature;
@@ -50,8 +49,7 @@ public class CreateExclC14nInteropValues {
 
         org.apache.xml.security.Init.init();
 
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(false);
-        Document doc = db.newDocument();
+        Document doc = XMLUtils.newDocument();
         String directory = "data/org/apache/xml/security/c14n/outExcl/";
         File signatureFile = new File(directory + "apacheSignature.xml");
         XMLSignature xmlSignature = new XMLSignature(doc,
@@ -196,8 +194,9 @@ public class CreateExclC14nInteropValues {
             + "<included                 >" + "\n" + "</included>"
             + "\n" + "</notIncluded>" + "\n" + "</notIncluded>"
             + "\n" + "</included>";
-            Document importDoc =
-                db.parse(new ByteArrayInputStream(xmlStr.getBytes()));
+            final InputStream is = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"));
+            final Document importDoc = XMLUtils.read(is, false);
+            is.close();
 
             obj.getElement().appendChild(doc.createTextNode("\n"));
             obj.getElement()
@@ -229,8 +228,9 @@ public class CreateExclC14nInteropValues {
             + "<included                 >" + "\n" + "</included>"
             + "\n" + "</notIncluded>" + "\n" + "</notIncluded>"
             + "\n" + "</included>";
-            Document importDoc =
-                db.parse(new ByteArrayInputStream(xmlStr.getBytes()));
+            final InputStream is = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"));
+            final Document importDoc = XMLUtils.read(is, false);
+            is.close();
 
             obj.getElement().appendChild(doc.createTextNode("\n"));
             obj.getElement()
@@ -262,8 +262,9 @@ public class CreateExclC14nInteropValues {
             + "<included    xml:lang='de'>" + "\n" + "</included>"
             + "\n" + "</notIncluded>" + "\n" + "</notIncluded>"
             + "\n" + "</included>";
-            Document importDoc =
-                db.parse(new ByteArrayInputStream(xmlStr.getBytes()));
+            final InputStream is = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"));
+            final Document importDoc = XMLUtils.read(is, false);
+            is.close();
 
             obj.getElement().appendChild(doc.createTextNode("\n"));
             obj.getElement()
@@ -296,8 +297,9 @@ public class CreateExclC14nInteropValues {
             + "<included                 >" + "\n" + "</included>"
             + "\n" + "</notIncluded>" + "\n" + "</included>"
             + "\n" + "</included>";
-            Document importDoc =
-                db.parse(new ByteArrayInputStream(xmlStr.getBytes()));
+            final InputStream is = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"));
+            final Document importDoc = XMLUtils.read(is, false);
+            is.close();
 
             obj.getElement().appendChild(doc.createTextNode("\n"));
             obj.getElement()
@@ -331,8 +333,9 @@ public class CreateExclC14nInteropValues {
             + "\n" + "<included                 >" + "\n"
             + "</included>" + "\n" + "</notIncluded>" + "\n"
             + "</included>" + "\n" + "</included>";
-            Document importDoc =
-                db.parse(new ByteArrayInputStream(xmlStr.getBytes()));
+            final InputStream is = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"));
+            final Document importDoc = XMLUtils.read(is, false);
+            is.close();
 
             obj.getElement().appendChild(doc.createTextNode("\n"));
             obj.getElement()
@@ -366,8 +369,9 @@ public class CreateExclC14nInteropValues {
             + "\n" + "<included>" + "\n" + "</included>" + "\n"
             + "</notIncluded>" + "\n" + "</included>" + "\n"
             + "</included>";
-            Document importDoc =
-                db.parse(new ByteArrayInputStream(xmlStr.getBytes()));
+            final InputStream is = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"));
+            final Document importDoc = XMLUtils.read(is, false);
+            is.close();
 
             obj.getElement().appendChild(doc.createTextNode("\n"));
             obj.getElement()

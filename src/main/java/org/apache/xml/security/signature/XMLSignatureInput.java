@@ -28,7 +28,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.xml.security.c14n.CanonicalizationException;
@@ -570,12 +569,11 @@ public class XMLSignatureInput {
 
     void convertToNodes() throws CanonicalizationException,
         ParserConfigurationException, IOException, SAXException {
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(false, secureValidation);
         // select all nodes, also the comments.
         try {
-            db.setErrorHandler(new org.apache.xml.security.utils.IgnoreAllErrorHandler());
 
-            Document doc = db.parse(this.getOctetStream());
+            Document doc = XMLUtils.read(this.getOctetStream(), secureValidation);
+
             this.subNode = doc;
         } catch (SAXException ex) {
             // if a not-wellformed nodeset exists, put a container around it...
@@ -586,10 +584,14 @@ public class XMLSignatureInput {
             baos.write("</container>".getBytes("UTF-8"));
 
             byte result[] = baos.toByteArray();
-            Document document = db.parse(new ByteArrayInputStream(result));
+
+            InputStream is = new ByteArrayInputStream(result);
+            Document document = XMLUtils.read(is, secureValidation);
+
+            is.close();
+												  
             this.subNode = document.getDocumentElement().getFirstChild().getFirstChild();
         } finally {
-            XMLUtils.repoolDocumentBuilder(db);
             if (this.inputOctetStreamProxy != null) {
                 this.inputOctetStreamProxy.close();
             }

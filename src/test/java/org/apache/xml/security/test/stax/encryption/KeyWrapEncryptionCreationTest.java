@@ -141,10 +141,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -207,10 +208,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -273,10 +275,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -337,10 +340,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -400,10 +404,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -463,10 +468,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -526,10 +532,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -595,10 +602,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -664,10 +672,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -733,10 +742,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);
@@ -802,10 +812,11 @@ public class KeyWrapEncryptionCreationTest extends Assert {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
 
-        Document document =
-            XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         NodeList nodeList = document.getElementsByTagNameNS("urn:example:po", "PaymentInfo");
         Assert.assertEquals(nodeList.getLength(), 0);

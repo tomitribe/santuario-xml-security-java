@@ -211,18 +211,12 @@ public class SignedInfo extends Manifest {
                 c14nizer.setSecureValidation(secureValidation);
 
                 byte[] c14nizedBytes = c14nizer.canonicalizeSubtree(element);
-                javax.xml.parsers.DocumentBuilder db =
-                    XMLUtils.createDocumentBuilder(false, secureValidation);
-                try {
-                    Document newdoc = db.parse(new ByteArrayInputStream(
-                            c14nizedBytes));
-                    Node imported = element.getOwnerDocument().importNode(
-                            newdoc.getDocumentElement(), true);
-                    element.getParentNode().replaceChild(imported, element);
-                    return (Element) imported;
-                } finally {
-                    XMLUtils.repoolDocumentBuilder(db);
-                }
+                Document newdoc = XMLUtils.read(new ByteArrayInputStream(c14nizedBytes), secureValidation);
+                Node imported = element.getOwnerDocument().importNode(
+                        newdoc.getDocumentElement(), true);
+                element.getParentNode().replaceChild(imported, element);
+                return (Element) imported;
+
             } catch (ParserConfigurationException ex) {
                 throw new XMLSecurityException(ex);
             } catch (IOException ex) {

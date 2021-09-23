@@ -19,6 +19,7 @@
 package org.apache.xml.security.test.dom.encryption;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Cipher;
@@ -26,7 +27,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.TransformerFactory;
 
 import org.apache.xml.security.algorithms.JCEMapper;
@@ -67,13 +67,11 @@ public class EncryptContentTest extends org.junit.Assert {
         "  </user>\n" +
         "</users>\n";
 
-    private DocumentBuilder db;
     private SecretKey secretKey;
     private boolean haveISOPadding;
 
     public EncryptContentTest() throws Exception {
         org.apache.xml.security.Init.init();
-        db = XMLUtils.createDocumentBuilder(false);
 
         byte[] bits192 = "abcdefghijklmnopqrstuvwx".getBytes();
         DESedeKeySpec keySpec = new DESedeKeySpec(bits192);
@@ -112,7 +110,10 @@ public class EncryptContentTest extends org.junit.Assert {
             return;
         }
 
-        Document doc = db.parse(new ByteArrayInputStream(DATA.getBytes("UTF8")));
+        final InputStream is = new ByteArrayInputStream(DATA.getBytes("UTF-8"));
+        final Document doc = XMLUtils.read(is, false);
+        is.close();
+
         NodeList dataToEncrypt = doc.getElementsByTagName("user");
 
         XMLCipher dataCipher = XMLCipher.getInstance(XMLCipher.TRIPLEDES);
@@ -161,7 +162,10 @@ public class EncryptContentTest extends org.junit.Assert {
             return;
         }
 
-        Document doc = db.parse(new ByteArrayInputStream(MULTIPLE_USER_DATA.getBytes("UTF8")));
+        final InputStream is = new ByteArrayInputStream(MULTIPLE_USER_DATA.getBytes("UTF-8"));
+        final Document doc = XMLUtils.read(is, false);
+        is.close();
+
         NodeList dataToEncrypt = doc.getElementsByTagName("user");
 
         XMLCipher dataCipher = XMLCipher.getInstance(XMLCipher.TRIPLEDES);

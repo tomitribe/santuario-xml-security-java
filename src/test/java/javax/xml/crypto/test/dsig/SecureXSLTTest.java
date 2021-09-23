@@ -76,7 +76,7 @@ public class SecureXSLTTest extends org.junit.Assert {
         File f = new File("doc.xml");
 
         Document doc =
-            XMLUtils.createDocumentBuilder(false).parse(new FileInputStream(signatureFile));
+            XMLUtils.read(new FileInputStream(signatureFile), false);
 
         NodeList nl =
             doc.getElementsByTagNameNS(XMLSignature.XMLNS, "Signature");

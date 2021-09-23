@@ -20,8 +20,7 @@ package org.apache.xml.security.test.dom.c14n.implementations;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-
-import javax.xml.parsers.DocumentBuilder;
+import java.io.InputStream;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -52,8 +51,6 @@ public class Santuario191Test extends org.junit.Assert {
       + "    <user2>Bob</user2>"
       + "</data>";
 
-    private DocumentBuilder db;
-
     static {
         org.apache.xml.security.Init.init();
     }
@@ -63,8 +60,9 @@ public class Santuario191Test extends org.junit.Assert {
         //
         // Parse the Data
         //
-        db = XMLUtils.createDocumentBuilder(false);
-        Document doc = db.parse(new ByteArrayInputStream(INPUT_DATA.getBytes("UTF8")));
+        final InputStream is = new ByteArrayInputStream(INPUT_DATA.getBytes("UTF-8"));
+        final Document doc = XMLUtils.read(is, false);
+        is.close();
 
         //
         // Canonicalize the data

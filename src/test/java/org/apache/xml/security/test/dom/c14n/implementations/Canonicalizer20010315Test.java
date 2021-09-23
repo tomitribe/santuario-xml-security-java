@@ -21,6 +21,7 @@ package org.apache.xml.security.test.dom.c14n.implementations;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,7 +29,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -46,8 +46,6 @@ import org.apache.xml.security.c14n.CanonicalizationException;
 import org.apache.xml.security.c14n.Canonicalizer;
 import org.apache.xml.security.c14n.InvalidCanonicalizerException;
 import org.apache.xml.security.test.dom.DSNamespaceContext;
-import org.apache.xml.security.test.dom.resource.TestVectorResolver;
-import org.apache.xml.security.utils.IgnoreAllErrorHandler;
 import org.apache.xml.security.utils.JavaUtils;
 import org.apache.xml.security.utils.XMLUtils;
 import org.w3c.dom.Document;
@@ -105,11 +103,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/31_c14n-comments.xml";
         String fileOut = prefix + "out/xpath_31_output-comments.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_WITH_COMMENTS;
-        boolean validating = true;
         String xpath = null;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -136,11 +133,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/31_c14n-comments.xml";
         String fileOut = prefix + "out/xpath_31_output-comments.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_WITH_COMMENTS;
-        boolean validating = true;
         String xpath = Canonicalizer.XPATH_C14N_WITH_COMMENTS_SINGLE_NODE;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -167,11 +163,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/31_c14n.xml";
         String fileOut = prefix + "out/xpath_31_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = null;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -199,11 +194,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/31_c14n.xml";
         String fileOut = prefix + "out/xpath_31_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = Canonicalizer.XPATH_C14N_WITH_COMMENTS_SINGLE_NODE;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -229,11 +223,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/32_c14n.xml";
         String fileOut = prefix + "out/xpath_32_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = null;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -259,11 +252,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/32_c14n.xml";
         String fileOut = prefix + "out/xpath_32_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = Canonicalizer.XPATH_C14N_WITH_COMMENTS_SINGLE_NODE;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -289,11 +281,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/33_c14n.xml";
         String fileOut = prefix + "out/xpath_33_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = null;    // Canonicalizer.XPATH_C14N_OMIT_COMMENTS_SINGLE_NODE;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     @org.junit.Test
@@ -306,11 +297,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/33_c14n.xml";
         String fileOut = prefix + "out/xpath_33_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = Canonicalizer.XPATH_C14N_WITH_COMMENTS_SINGLE_NODE;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -338,11 +328,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/34_c14n.xml";
         String fileOut = prefix + "out/xpath_34_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = false;
         String xpath = null;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -377,11 +366,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/34_c14n_validatingParser.xml";
         String fileOut = prefix + "out/xpath_34_output_validatingParser.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = null;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -417,11 +405,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/34_c14n_validatingParser.xml";
         String fileOut = prefix + "out/xpath_34_output_validatingParser.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = Canonicalizer.XPATH_C14N_WITH_COMMENTS_SINGLE_NODE;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -447,11 +434,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/35_c14n.xml";
         String fileOut = prefix + "out/xpath_35_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = null;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -477,11 +463,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/35_c14n.xml";
         String fileOut = prefix + "out/xpath_35_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = Canonicalizer.XPATH_C14N_WITH_COMMENTS_SINGLE_NODE;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, xpath));
     }
 
     /**
@@ -507,11 +492,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/36_c14n.xml";
         String fileOut = prefix + "out/xpath_36_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = null;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI,  xpath));
     }
 
     /**
@@ -537,11 +521,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/36_c14n.xml";
         String fileOut = prefix + "out/xpath_36_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
         String xpath = Canonicalizer.XPATH_C14N_WITH_COMMENTS_SINGLE_NODE;
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI,  xpath));
     }
 
     /**
@@ -567,7 +550,6 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef = prefix + "in/37_c14n.xml";
         String fileOut = prefix + "out/xpath_37_output.xml";
         String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
-        boolean validating = true;
 
         Map<String, String> namespace = new HashMap<String, String>();
         namespace.put("ietf", "http://www.ietf.org");
@@ -580,7 +562,7 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
             + "]";
 
         assertTrue(descri,
-                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI, validating, xpath, namespace));
+                   c14nAndCompare(fileIn, fileRef, fileOut, c14nURI,  xpath, namespace));
     }
 
     /**
@@ -608,12 +590,7 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         //String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
         //boolean validating = true;
 
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(false, false);
-        org.xml.sax.EntityResolver resolver = new TestVectorResolver();
-
-        db.setEntityResolver(resolver);
-
-        Document doc = db.parse(resolver.resolveEntity(null, fileIn));
+        Document doc = XMLUtils.read(new FileInputStream(fileIn), false);
 
         String xpath = "(//. | //@* | //namespace::*)"
             + "[ "
@@ -635,8 +612,7 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         Canonicalizer c14n =
             Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS);
         byte c14nBytes[] = c14n.canonicalizeXPathNodeSet(nodes);
-        InputStream refStream = resolver.resolveEntity(null,
-                                                       fileRef).getByteStream();
+        InputStream refStream = new FileInputStream(fileRef);
         byte refBytes[] = JavaUtils.getBytesFromStream(refStream);
         assertEquals(new String(refBytes),new String(c14nBytes));
     }
@@ -675,8 +651,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
             + "";
         //J+
 
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(false);
-        Document doc = db.parse(new ByteArrayInputStream(inputStr.getBytes()));
+        final InputStream is = new ByteArrayInputStream(inputStr.getBytes());
+        final Document doc = XMLUtils.read(is, false);
+        is.close();
+
         boolean weCatchedTheRelativeNS = false;
 
         try {
@@ -722,10 +700,7 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         Canonicalizer c14n =
             Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS);
         byte c14nBytes[] = c14n.canonicalize(utf16);
-        org.xml.sax.EntityResolver resolver = new TestVectorResolver();
-        InputStream refStream =
-            resolver.resolveEntity(
-                null, prefix + "/in/testTranslationFromUTF16toUTF8.xml").getByteStream();
+        InputStream refStream = new FileInputStream(prefix + "/in/testTranslationFromUTF16toUTF8.xml");
         byte refBytes[] = JavaUtils.getBytesFromStream(refStream);
         boolean equal = java.security.MessageDigest.isEqual(refBytes, c14nBytes);
 
@@ -984,11 +959,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
     ParserConfigurationException, CanonicalizationException,
     InvalidCanonicalizerException, TransformerException, XPathExpressionException {
 
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(true);
+        final InputStream is = new ByteArrayInputStream(input.getBytes());
+        final Document doc = XMLUtils.read(is, true);
+        is.close();
 
-        db.setErrorHandler(new IgnoreAllErrorHandler());
-
-        Document doc = db.parse(new ByteArrayInputStream(input.getBytes()));
         Canonicalizer c14nizer =
             Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS);
 
@@ -1014,14 +988,13 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
                                    String fileRef,
                                    String fileOut,
                                    String c14nURI,
-                                   boolean validating,
                                    String xpath
                                ) throws IOException, FileNotFoundException, SAXException,
                                    ParserConfigurationException, CanonicalizationException,
                                    InvalidCanonicalizerException, TransformerException, XPathExpressionException {
         Map<String, String> namespace = new HashMap<String, String>();
         return c14nAndCompare(fileIn, fileRef, fileOut,
-            c14nURI, validating, xpath, namespace);
+            c14nURI, xpath, namespace);
     }
 
     private boolean c14nAndCompare(
@@ -1029,23 +1002,13 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         String fileRef,
         String fileOut,
         String c14nURI,
-        boolean validating,
         String xpath,
         Map<String, String> namespaces
     ) throws IOException, FileNotFoundException, SAXException,
         ParserConfigurationException, CanonicalizationException,
         InvalidCanonicalizerException, TransformerException, XPathExpressionException {
 
-        DocumentBuilder documentBuilder = XMLUtils.createDocumentBuilder(validating, false);
-
-        // throw away all warnings and errors
-        documentBuilder.setErrorHandler(new IgnoreAllErrorHandler());
-
-        // org.xml.sax.EntityResolver resolver = new TestVectorResolver();
-        // documentBuilder.setEntityResolver(resolver);
-        // Document doc = documentBuilder.parse(resolver.resolveEntity(null, fileIn));
-
-        Document doc = documentBuilder.parse(fileIn);
+        Document doc = XMLUtils.read(fileIn, false);
 
 
         Canonicalizer c14n = Canonicalizer.getInstance(c14nURI);
@@ -1108,10 +1071,12 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         throws ParserConfigurationException, IOException, SAXException,
         TransformerConfigurationException, TransformerException {
         //String ENCODING_ISO8859_1 = "ISO-8859-1";
-        //String ENCODING_UTF8 = "UTF-8";
+        //String ENCODING_UTF8 = java.nio.charset.StandardCharsets.UTF_8;
         String ENCODING_UTF16 = "UTF-16";
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(false);
-        Document doc = db.parse(new ByteArrayInputStream(input));
+        final InputStream is = new ByteArrayInputStream(input);
+        final Document doc = XMLUtils.read(is, false);
+        is.close();
+
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Transformer transformer = tFactory.newTransformer();
 

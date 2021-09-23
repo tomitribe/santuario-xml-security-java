@@ -433,11 +433,7 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
 //      Canonicalizer c14n =
 //         Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS);
 //      byte c14nBytes[] = c14n.canonicalize(utf16);
-//      org.xml.sax.EntityResolver resolver = new TestVectorResolver();
-//      InputStream refStream = resolver.resolveEntity(
-//         null,
-//            prefix + "/in/testTranslationFromUTF16toUTF8.xml")
-//               .getByteStream();
+//      InputStream refStream = new FileInputStream(prefix + "/in/testTranslationFromUTF16toUTF8.xml");
 //      byte refBytes[] = JavaUtils.getBytesFromStream(refStream);
 //      boolean equal = java.security.MessageDigest.isEqual(refBytes, c14nBytes);
 //
@@ -670,7 +666,7 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
 //      db.setErrorHandler(new org.apache.xml.security.utils
 //         .IgnoreAllErrorHandler());
 //
-//      Document doc = db.parse(new ByteArrayInputStream(input.getBytes()));
+//      Document doc = XMLUtils.read(new ByteArrayInputStream(input.getBytes()));
 //      Canonicalizer c14nizer =
 //         Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS);
 //      CachedXPathAPI xpathAPI = new CachedXPathAPI();
@@ -762,7 +758,7 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
 //      String ENCODING_UTF16 = "UTF-16";
 //      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 //      DocumentBuilder db = dbf.newDocumentBuilder();
-//      Document doc = db.parse(new ByteArrayInputStream(input));
+//      Document doc = XMLUtils.read(new ByteArrayInputStream(input));
 //      TransformerFactory tFactory = TransformerFactory.newInstance();
 //      Transformer transformer = tFactory.newTransformer();
 //

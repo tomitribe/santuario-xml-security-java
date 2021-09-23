@@ -97,9 +97,10 @@ public class SignatureEncryptionTest extends AbstractSignatureCreationTest {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
-        Document document =
-                XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         // Decrypt using DOM API
         Document doc =
@@ -164,9 +165,10 @@ public class SignatureEncryptionTest extends AbstractSignatureCreationTest {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
-        Document document =
-                XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         // Decrypt using DOM API
         Document doc =
@@ -239,9 +241,10 @@ public class SignatureEncryptionTest extends AbstractSignatureCreationTest {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
-        Document document =
-                XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         // Decrypt using DOM API
         Document doc =
@@ -314,9 +317,10 @@ public class SignatureEncryptionTest extends AbstractSignatureCreationTest {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
-        Document document =
-                XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         // Decrypt using DOM API
         Document doc =
@@ -389,9 +393,10 @@ public class SignatureEncryptionTest extends AbstractSignatureCreationTest {
         XmlReaderToWriter.writeAll(xmlStreamReader, xmlStreamWriter);
         xmlStreamWriter.close();
 
-        // System.out.println("Got:\n" + new String(baos.toByteArray(), "UTF-8"));
-        Document document =
-                XMLUtils.createDocumentBuilder(false).parse(new ByteArrayInputStream(baos.toByteArray()));
+        // System.out.println("Got:\n" + new String(baos.toByteArray(), StandardCharsets.UTF_8.name()));
+        final InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        final Document document = XMLUtils.read(is, false);
+        is.close();
 
         // Verify using DOM
         verifyUsingDOM(document, cert, properties.getSignatureSecureParts());
@@ -490,7 +495,7 @@ public class SignatureEncryptionTest extends AbstractSignatureCreationTest {
         XMLStreamReader securityStreamReader =
                 inboundXMLSec.processInMessage(xmlStreamReader, null, testSecurityEventListener);
 
-        Document document = StAX2DOM.readDoc(XMLUtils.createDocumentBuilder(false), securityStreamReader);
+        Document document = StAX2DOM.readDoc(securityStreamReader);
 
         // javax.xml.transform.Transformer transformer = TransformerFactory.newInstance().newTransformer();
         // transformer.transform(new DOMSource(document), new StreamResult(System.out));
