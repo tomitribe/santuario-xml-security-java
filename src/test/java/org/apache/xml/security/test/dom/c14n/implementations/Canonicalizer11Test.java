@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPath;
@@ -355,17 +354,11 @@ public class Canonicalizer11Test extends org.junit.Assert {
         ParserConfigurationException, CanonicalizationException,
         InvalidCanonicalizerException, TransformerException, XPathExpressionException {
 
-        DocumentBuilder documentBuilder = XMLUtils.createDocumentBuilder(validating, false);
-
-        // throw away all warnings and errors
-        documentBuilder.setErrorHandler(new IgnoreAllErrorHandler());
-
         // org.xml.sax.EntityResolver resolver = new TestVectorResolver();
         // documentBuilder.setEntityResolver(resolver);
         // Document doc = documentBuilder.parse(resolver.resolveEntity(null, fileIn));
 
-        Document doc = documentBuilder.parse(fileIn);
-
+        Document doc = XMLUtils.read(fileIn, validating, false, new IgnoreAllErrorHandler());
 
         Canonicalizer c14n = Canonicalizer.getInstance(c14nURI);
         byte c14nBytes[] = null;

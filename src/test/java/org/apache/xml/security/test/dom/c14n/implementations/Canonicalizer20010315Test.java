@@ -28,7 +28,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -608,12 +607,8 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         //String c14nURI = Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS;
         //boolean validating = true;
 
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(false, false);
         org.xml.sax.EntityResolver resolver = new TestVectorResolver();
-
-        db.setEntityResolver(resolver);
-
-        Document doc = db.parse(resolver.resolveEntity(null, fileIn));
+        Document doc = XMLUtils.read(resolver.resolveEntity(null, fileIn), false, false, resolver);
 
         String xpath = "(//. | //@* | //namespace::*)"
             + "[ "
@@ -675,8 +670,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
             + "";
         //J+
 
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(false);
-        Document doc = db.parse(new ByteArrayInputStream(inputStr.getBytes()));
+        Document doc = null;
+        try (InputStream is = new ByteArrayInputStream(inputStr.getBytes())) {
+            doc = XMLUtils.read(is, false);
+        }
         boolean weCatchedTheRelativeNS = false;
 
         try {
@@ -984,11 +981,10 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
     ParserConfigurationException, CanonicalizationException,
     InvalidCanonicalizerException, TransformerException, XPathExpressionException {
 
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(true);
-
-        db.setErrorHandler(new IgnoreAllErrorHandler());
-
-        Document doc = db.parse(new ByteArrayInputStream(input.getBytes()));
+        Document doc = null;
+        try (InputStream is = new ByteArrayInputStream(input.getBytes())) {
+            doc = XMLUtils.read(is, true, true, new IgnoreAllErrorHandler());
+        }
         Canonicalizer c14nizer =
             Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS);
 
@@ -1036,16 +1032,11 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         ParserConfigurationException, CanonicalizationException,
         InvalidCanonicalizerException, TransformerException, XPathExpressionException {
 
-        DocumentBuilder documentBuilder = XMLUtils.createDocumentBuilder(validating, false);
-
-        // throw away all warnings and errors
-        documentBuilder.setErrorHandler(new IgnoreAllErrorHandler());
-
         // org.xml.sax.EntityResolver resolver = new TestVectorResolver();
         // documentBuilder.setEntityResolver(resolver);
         // Document doc = documentBuilder.parse(resolver.resolveEntity(null, fileIn));
 
-        Document doc = documentBuilder.parse(fileIn);
+        Document doc = XMLUtils.read(fileIn, validating, false, new IgnoreAllErrorHandler());
 
 
         Canonicalizer c14n = Canonicalizer.getInstance(c14nURI);
@@ -1108,10 +1099,12 @@ public class Canonicalizer20010315Test extends org.junit.Assert {
         throws ParserConfigurationException, IOException, SAXException,
         TransformerConfigurationException, TransformerException {
         //String ENCODING_ISO8859_1 = "ISO-8859-1";
-        //String ENCODING_UTF8 = "UTF-8";
+        //String ENCODING_UTF8 = java.nio.charset.StandardCharsets.UTF_8;
         String ENCODING_UTF16 = "UTF-16";
-        DocumentBuilder db = XMLUtils.createDocumentBuilder(false);
-        Document doc = db.parse(new ByteArrayInputStream(input));
+        Document doc = null;
+        try (InputStream is = new ByteArrayInputStream(input)) {
+            doc = XMLUtils.read(is, false);
+        }
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Transformer transformer = tFactory.newTransformer();
 
