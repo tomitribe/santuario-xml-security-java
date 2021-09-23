@@ -22,7 +22,7 @@
     <artifactId>xmlsec</artifactId>
     <packaging>bundle</packaging>
     <name>Apache XML Security for Java</name>
-    <version>1.5.9-TT.1</version>
+    <version>1.5.9-TT.2-SNAPSHOT</version>
     <description>
         Apache XML Security for Java supports XML-Signature Syntax and Processing,
         W3C Recommendation 12 February 2002, and XML Encryption Syntax and
@@ -59,7 +59,7 @@
         <connection>scm:git:git@github.com:tomitribe/santuario-xml-security-java.git</connection>
         <developerConnection>scm:git:git@github.com:tomitribe/santuario-xml-security-java.git</developerConnection>
         <url>scm:git:git@github.com:tomitribe/santuario-xml-security-java.git</url>
-      <tag>xmlsec-1.5.9-TT.1</tag>
+      <tag>HEAD</tag>
   </scm>
     <organization>
         <name>The Apache Software Foundation</name>
