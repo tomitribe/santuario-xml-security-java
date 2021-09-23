@@ -22,7 +22,7 @@
     <artifactId>xmlsec</artifactId>
     <packaging>bundle</packaging>
     <name>Apache XML Security for Java</name>
-    <version>2.0.11-SNAPSHOT</version>
+    <version>2.0.11-TT.2-SNAPSHOT</version>
     <description>
         Apache XML Security for Java supports XML-Signature Syntax and Processing,
         W3C Recommendation 12 February 2002, and XML Encryption Syntax and
@@ -56,14 +56,11 @@
         </license>
     </licenses>
     <scm>
-        <connection>
-            scm:svn:http://svn.apache.org/repos/asf/santuario/xml-security-java/branches/2.0.x-fixes/
-        </connection>
-        <developerConnection>
-            scm:svn:https://svn.apache.org/repos/asf/santuario/xml-security-java/branches/2.0.x-fixes/
-        </developerConnection>
-        <url>http://svn.apache.org/repos/asf/santuario/xml-security-java/branches/2.0.x-fixes/</url>
-    </scm>
+        <connection>scm:git:git@github.com:tomitribe/santuario-xml-security-java.git</connection>
+        <developerConnection>scm:git:git@github.com:tomitribe/santuario-xml-security-java.git</developerConnection>
+        <url>scm:git:git@github.com:tomitribe/santuario-xml-security-java.git</url>
+      <tag>HEAD</tag>
+  </scm>
     <organization>
         <name>The Apache Software Foundation</name>
         <url>http://www.apache.org/</url>
@@ -583,17 +580,17 @@
 
     <distributionManagement>
         <repository>
-            <id>apache.releases.https</id>
-            <name>Apache Release Distribution Repository</name>
-            <url>https://repository.apache.org/service/local/staging/deploy/maven2</url>
+            <id>tomitribe.releases.https</id>
+            <name>Tomitribe Release Distribution Repository</name>
+            <url>https://repository.tomitribe.com/service/local/staging/deploy/maven2</url>
         </repository>
+
         <snapshotRepository>
-            <id>apache.snapshots.https</id>
-            <name>Apache Development Snapshot Repository</name>
-            <url>https://repository.apache.org/content/repositories/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
+            <id>tomitribe.snapshots.https</id>
+            <name>Tomitribe Development Snapshot Repository</name>
+            <url>https://repository.tomitribe.com/content/repositories/snapshots-tomitribe</url>
         </snapshotRepository>
-    </distributionManagement>
+        </distributionManagement>
 
     <reporting>
         <plugins>
