@@ -41,7 +41,8 @@ public class X509DataTest extends org.junit.Assert {
     public void testAddX509SubjectName() throws Exception {
         Init.init();
 
-        Document doc = XMLUtils.newDocument();
+        javax.xml.parsers.DocumentBuilder db = XMLUtils.createDocumentBuilder(false);
+        Document doc = db.newDocument();
         XMLSignature sig = new XMLSignature(doc, "", XMLSignature.ALGO_ID_SIGNATURE_DSA);
         
         doc.appendChild(sig.getElement());
@@ -71,10 +72,8 @@ public class X509DataTest extends org.junit.Assert {
     
     private XMLSignature getSignature(byte[] s) throws Exception {
 
-        Document doc = null;
-        try (InputStream is = new ByteArrayInputStream(s)) {
-            doc = XMLUtils.read(is, false);
-        }
+        javax.xml.parsers.DocumentBuilder db = XMLUtils.createDocumentBuilder(false);
+        Document doc = db.parse(new ByteArrayInputStream(s));
         Element el = (Element)doc.getFirstChild();
         return new XMLSignature(el, "");
     }
